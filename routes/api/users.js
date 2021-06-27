@@ -4,6 +4,8 @@ const gravatar = require('gravatar');
 const { check, validationResult } = require('express-validator');
 const bcrypt=require('bcryptjs');
 const User = require('../../models/User');
+const jwt = require('jsonwebtoken');
+const config=require('config');
 //@route GET api/users
 //@desc Test route
 //@access  public
@@ -53,7 +55,19 @@ router.post(
       //Encrypt  password
       //return jsonwebtoken and that in order to keep the user logged in after the registeration.
 
-      res.send('User Registered');
+      const payload={
+          user:{
+              id:user.id
+          }
+      }
+      jwt.sign(
+          payload,
+          config.get('jwtSecret'),
+          {expiresIn:3600},
+          (err,token)=>{
+              if(err) throw err;
+              res.json({token});
+          })
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');

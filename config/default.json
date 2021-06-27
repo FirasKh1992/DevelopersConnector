@@ -1,3 +1,4 @@
 {
-    "mondgoURI":"mongodb+srv://adminDB:7131019@devconnector.aphvn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    "mondgoURI":"mongodb+srv://adminDB:7131019@devconnector.aphvn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret":"mySecretToken"
 }
