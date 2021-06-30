@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import {Link} from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -19,8 +18,7 @@ const Register = () => {
     if (password !== password2) {
       console.log('passwords does not match');
     } else {
-      
-       console.log('Success');
+      console.log('Success');
     }
   };
 
