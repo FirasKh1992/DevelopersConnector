@@ -15,11 +15,15 @@ router.get('/me', auth, async (req, res) => {
       'user',
       ['name', 'avatar']
     );
+ 
     if (!profile) {
-      res.status(500).send('there is no profile for this user');
+      return res.status(500).send('there is no profile for this user');
     }
-    res.json(profile);
+   
+     res.json(profile);
+  
   } catch (err) {
+  
     console.error(err.message);
     res.status(500).send('Server error');
   }

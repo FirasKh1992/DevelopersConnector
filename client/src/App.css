@@ -575,3 +575,10 @@ button {
     padding: 0.3rem 0.4rem;
   }
 }
+.loading {
+  display: flex;
+  width: 200px;
+  margin: auto;
+  align-items: center;
+  height: 100vh;
+}

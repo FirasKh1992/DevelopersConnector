@@ -6,12 +6,14 @@ import { GET_PROFILE, PROFILE_ERROR } from './types';
 //GET CURRENT USERS PROFILE
 export const getCurrentUserProfile = () => async dispatch => {
   try {
+
     const res = await axios.get('/api/profile/me');
 
     dispatch({
       type: GET_PROFILE,
       payload: res.data,
     });
+   
   } catch (err) {
       dispatch({
           type:PROFILE_ERROR,
