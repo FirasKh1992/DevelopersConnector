@@ -65,7 +65,7 @@ const EditProfile = ({
         linkedin: loading || !profile.social ? '':profile.linkedin,
         githubusername: loading || !profile.githubusername ? '':profile.githubusername,
     })
-  },[]);
+  },[]);// eslint-disable-line react-hooks/exhaustive-deps
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 

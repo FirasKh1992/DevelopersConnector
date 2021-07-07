@@ -13,11 +13,11 @@ export const DashboardActions = () => {
         <FontAwesomeIcon className=' text-primary' icon={faUserCircle} />
         Edit Profile
       </Link>
-      <Link to='/add-experienc' className='btn btn-light'>
+      <Link to='/add-experience' className='btn btn-light'>
         <FontAwesomeIcon className=' text-primary' icon={faBlackTie} />
         Add Experience
       </Link>
-      <Link to='/add-educationl' className='btn btn-light'>
+      <Link to='/add-education' className='btn btn-light'>
         <FontAwesomeIcon className=' text-primary' icon={faGraduationCap} />
         Add Education
       </Link>
