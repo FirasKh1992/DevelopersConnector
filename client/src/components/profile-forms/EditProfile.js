@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createProfile } from '../../actions/profile';
+import { createProfile, getCurrentUserProfile } from '../../actions/profile';
 import { Link, withRouter } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +13,12 @@ import {
   faLinkedin,
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
-const CreateProfile = ({ createProfile, history }) => {
+const EditProfile = ({
+  profile: { profile, loading },
+  createProfile,
+  history,
+  getCurrentUserProfile,
+}) => {
   const [formData, setFormData] = useState({
     company: '',
     website: '',
@@ -44,13 +49,29 @@ const CreateProfile = ({ createProfile, history }) => {
     githubusername,
     linkedin,
   } = formData;
-
+  useEffect(() => {
+    getCurrentUserProfile();
+    setFormData({
+        company: loading || !profile.company ? '':profile.company,
+        website: loading || !profile.website ? '':profile.website,
+        location: loading || !profile.location ? '':profile.location,
+        skills: loading || !profile.skills ? '':profile.skills,
+        status: loading || !profile.status ? '':profile.status,
+        bio: loading || !profile.bio ? '':profile.bio,
+        twitter: loading || !profile.social ? '':profile.twitter,
+        facebook: loading || !profile.social ? '':profile.facebook,
+        instagram: loading || !profile.social ? '':profile.instagram,
+        youtube: loading || !profile.social ? '':profile.youtube,
+        linkedin: loading || !profile.social ? '':profile.linkedin,
+        githubusername: loading || !profile.githubusername ? '':profile.githubusername,
+    })
+  },[]);
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
-    createProfile(formData, history);
+    createProfile(formData, history,true);
   };
   return (
     <div className='page'>
@@ -245,7 +266,7 @@ const CreateProfile = ({ createProfile, history }) => {
         )}
 
         <input type='submit' className='btn btn-primary my-1' />
-        <Link class='btn btn-light my-1' to='/dashboard'>
+        <Link className='btn btn-light my-1' to='/dashboard'>
           Go Back
         </Link>
       </form>
@@ -253,8 +274,16 @@ const CreateProfile = ({ createProfile, history }) => {
   );
 };
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
+  getCurrentUserProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object,
 };
+const mapStateToProps = state =>({
+    profile: state.profile
 
-export default connect(null, { createProfile })(withRouter(CreateProfile));
+});
+export default connect(mapStateToProps, {
+  createProfile,
+  getCurrentUserProfile,
+})(withRouter(EditProfile));

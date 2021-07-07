@@ -51,9 +51,9 @@ router.get('/user/:user_id', auth, async (req, res) => {
   }
 });
 
-//@route GET api/profile
-//@desc get create and update a user profile
-//@access  private
+// @route    POST api/profile
+// @desc     Create or update user profile
+// @access   Private
 
 router.post(
   '/',
@@ -93,7 +93,7 @@ router.post(
     if (bio) profileFeilds.bio = bio;
     if (status) profileFeilds.status = status;
     if (githubusername) profileFeilds.githubusername = githubusername;
-    if (skills) {
+    if (!Array.isArray(skills)) {
       profileFeilds.skills = skills.split(',').map(skill => skill.trim());
     }
     profileFeilds.social = {};

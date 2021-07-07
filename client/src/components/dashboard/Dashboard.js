@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { getCurrentUserProfile } from '../../actions/profile';
 import Spinner from '../layouts/Spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { DashboardActions } from './DashboardActions';
 
 const Dashboard = ({
   getCurrentUserProfile,
@@ -25,7 +25,7 @@ const Dashboard = ({
         <FontAwesomeIcon icon={faUser} /> Welcome {name !== null && name}
       </p>
       {profile !== null ? (
-        <Fragment>has</Fragment>
+        <Fragment><DashboardActions/></Fragment>
       ) : (
         <Fragment>
           <p>You have not yet setup a profile please add some info</p>
