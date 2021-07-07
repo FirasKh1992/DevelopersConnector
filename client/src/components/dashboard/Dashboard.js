@@ -7,6 +7,8 @@ import Spinner from '../layouts/Spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { DashboardActions } from './DashboardActions';
+import Experience from './Experience';
+import Education from './Education';
 
 const Dashboard = ({
   getCurrentUserProfile,
@@ -25,7 +27,11 @@ const Dashboard = ({
         <FontAwesomeIcon icon={faUser} /> Welcome {name !== null && name}
       </p>
       {profile !== null ? (
-        <Fragment><DashboardActions/></Fragment>
+        <Fragment>
+          <DashboardActions/>
+          <Experience experience={profile.experience}/>
+          <Education education={profile.education}/>
+          </Fragment>
       ) : (
         <Fragment>
           <p>You have not yet setup a profile please add some info</p>
