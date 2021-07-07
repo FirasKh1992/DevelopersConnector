@@ -19,6 +19,7 @@ body {
   line-height: 1.6;
   background-color: #fff;
   color: #333;
+ 
 }
 
 a {
@@ -581,4 +582,11 @@ button {
   margin: auto;
   align-items: center;
   height: 100vh;
+}
+.social-icons{
+ margin-right: 1rem;
+}
+.page{
+
+  margin-left: 2.5rem;
 }
