@@ -52,26 +52,27 @@ const EditProfile = ({
   useEffect(() => {
     getCurrentUserProfile();
     setFormData({
-        company: loading || !profile.company ? '':profile.company,
-        website: loading || !profile.website ? '':profile.website,
-        location: loading || !profile.location ? '':profile.location,
-        skills: loading || !profile.skills ? '':profile.skills,
-        status: loading || !profile.status ? '':profile.status,
-        bio: loading || !profile.bio ? '':profile.bio,
-        twitter: loading || !profile.social ? '':profile.twitter,
-        facebook: loading || !profile.social ? '':profile.facebook,
-        instagram: loading || !profile.social ? '':profile.instagram,
-        youtube: loading || !profile.social ? '':profile.youtube,
-        linkedin: loading || !profile.social ? '':profile.linkedin,
-        githubusername: loading || !profile.githubusername ? '':profile.githubusername,
-    })
-  },[]);// eslint-disable-line react-hooks/exhaustive-deps
+      company: loading || !profile.company ? '' : profile.company,
+      website: loading || !profile.website ? '' : profile.website,
+      location: loading || !profile.location ? '' : profile.location,
+      skills: loading || !profile.skills ? '' : profile.skills,
+      status: loading || !profile.status ? '' : profile.status,
+      bio: loading || !profile.bio ? '' : profile.bio,
+      twitter: loading || !profile.social ? '' : profile.twitter,
+      facebook: loading || !profile.social ? '' : profile.facebook,
+      instagram: loading || !profile.social ? '' : profile.instagram,
+      youtube: loading || !profile.social ? '' : profile.youtube,
+      linkedin: loading || !profile.social ? '' : profile.linkedin,
+      githubusername:
+        loading || !profile.githubusername ? '' : profile.githubusername,
+    });
+  }, [loading, getCurrentUserProfile]);
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
-    createProfile(formData, history,true);
+    createProfile(formData, history, true);
   };
   return (
     <div className='page'>
@@ -279,9 +280,8 @@ EditProfile.propTypes = {
   getCurrentUserProfile: PropTypes.func.isRequired,
   profile: PropTypes.object,
 };
-const mapStateToProps = state =>({
-    profile: state.profile
-
+const mapStateToProps = state => ({
+  profile: state.profile,
 });
 export default connect(mapStateToProps, {
   createProfile,

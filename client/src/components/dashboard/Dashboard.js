@@ -13,20 +13,20 @@ import { deleteAccount } from '../../actions/profile';
 
 const Dashboard = ({
   getCurrentUserProfile,
-  auth: { name },
+  auth:{user},
   profile: { profile, loading },
   deleteAccount,
 }) => {
   useEffect(() => {
     getCurrentUserProfile();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [getCurrentUserProfile]); 
   return loading && profile === null ? (
     <Spinner />
   ) : (
     <Fragment>
       <h1 className='large text-primary'>Dashboard</h1>
       <p className='lead'>
-        <FontAwesomeIcon icon={faUser} /> Welcome {name !== null && name}
+        <FontAwesomeIcon icon={faUser} /> Welcome {user !== null && user.name}
       </p>
       {profile !== null ? (
         <Fragment>

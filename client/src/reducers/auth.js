@@ -47,6 +47,7 @@ export default function auth(state = initialState, action) {
         ...payload,
         isAuthenticated: true,
         loading: false,
+        user:payload
       };
     default:
       return state;

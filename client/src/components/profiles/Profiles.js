@@ -10,7 +10,7 @@ import ProfileItem from './ProfileItem';
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
     getProfiles();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [getProfiles]); 
 
   return (
     <section className='container'>
