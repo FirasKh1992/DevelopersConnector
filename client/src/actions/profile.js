@@ -7,6 +7,8 @@ import {
   PROFILE_ERROR,
   UPDATE_PROFILE,
   CLEAR_PROFILE,
+  GET_PROFILES,
+  GET_REPOS
 } from './types';
 
 //GET CURRENT USERS PROFILE
@@ -25,6 +27,65 @@ export const getCurrentUserProfile = () => async dispatch => {
     });
   }
 };
+
+//get all profiles
+export const getProfiles = () => async dispatch => {
+
+  try {
+    dispatch({type:CLEAR_PROFILE});
+    const res = await axios.get('/api/profile');
+
+    dispatch({
+      type: GET_PROFILES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+}
+
+//get profile by user id
+export const getProfileById = userId => async dispatch => {
+
+  try {
+    dispatch({type:CLEAR_PROFILE});
+    const res = await axios.get(`/api/profile/user/${userId}`);
+
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    });
+
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+}
+
+//get github repos
+export const getGithubRepos = userName => async dispatch => {
+
+  try {
+    const res = await axios.get(`/api/profile/github//${userName}`);
+
+    dispatch({
+      type: GET_REPOS,
+      payload: res.data,
+    });
+
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+}
+
 
 //create/edit profile
 export const createProfile =
