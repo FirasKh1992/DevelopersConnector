@@ -4,21 +4,31 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faCode, faUser,faSignOutAlt,faUserPlus, faLaptopCode, faSignInAlt} from '@fortawesome/free-solid-svg-icons'
+import {
+  faCode,
+  faUser,
+  faSignOutAlt,
+  faUserPlus,
+  faLaptopCode,
+  faSignInAlt,
+} from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
       <li>
+        <FontAwesomeIcon icon={faLaptopCode} />{' '}
+        <Link to='/profiles'>Developers</Link>
+      </li>
+      <li>
         <Link to='/dashboard'>
-         
           <FontAwesomeIcon icon={faUser} />{' '}
           <span className='hide-sm'>Dashboard</span>
         </Link>
       </li>
       <li>
         <a onClick={logout} href='!#'>
-        <FontAwesomeIcon icon={faSignOutAlt} />{' '}
+          <FontAwesomeIcon icon={faSignOutAlt} />{' '}
           <span className='hide-sm'>Logout</span>
         </a>
       </li>
@@ -27,16 +37,15 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const questLinks = (
     <ul>
       <li>
-      <FontAwesomeIcon icon={faLaptopCode} />{' '}
-        <Link to='/profile'>Developers</Link>
+        <FontAwesomeIcon icon={faLaptopCode} />{' '}
+        <Link to='/profiles'>Developers</Link>
       </li>
       <li>
-      <FontAwesomeIcon icon={faUserPlus} />{' '}
+        <FontAwesomeIcon icon={faUserPlus} />{' '}
         <Link to='/register'>Register</Link>
       </li>
       <li>
-      <FontAwesomeIcon icon={faSignInAlt} />{' '}
-        <Link to='/login'>Login</Link>
+        <FontAwesomeIcon icon={faSignInAlt} /> <Link to='/login'>Login</Link>
       </li>
     </ul>
   );
@@ -44,12 +53,10 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <nav className='navbar bg-dark'>
       <h1>
         <Link to='/'>
-        <FontAwesomeIcon icon={faCode} />{' '} DevConnector
+          <FontAwesomeIcon icon={faCode} /> DevConnector
         </Link>
       </h1>
-      {!loading && (
         <Fragment>{isAuthenticated ? authLinks : questLinks}</Fragment>
-      )}
     </nav>
   );
 };
