@@ -3,8 +3,10 @@ const request = require('request');
 const config = require('config');
 const router = express.Router();
 const auth = require('../../middleware/auth');
-const Profile = require('../../models/Profile');
 const { check, validationResult } = require('express-validator');
+const Profile = require('../../models/Profile');
+const User = require('../../models/User');
+const Post = require('../../models/Post');
 
 //@route GET api/profile/me
 //@desc get current users profile
@@ -15,15 +17,13 @@ router.get('/me', auth, async (req, res) => {
       'user',
       ['name', 'avatar']
     );
- 
+
     if (!profile) {
       return res.status(500).send('there is no profile for this user');
     }
-   
-     res.json(profile);
-  
+
+    res.json(profile);
   } catch (err) {
-  
     console.error(err.message);
     res.status(500).send('Server error');
   }
@@ -144,7 +144,8 @@ router.get('/', async (req, res) => {
 //@access  private
 router.delete('/', auth, async (req, res) => {
   try {
-    //@todo-remove users posts
+    //remove user posts
+    await Post.deleteMany({ user: req.user.id });
     //remove profile
     await Profile.findOneAndDelete({ user: req.user.id });
     //remove user
@@ -301,7 +302,7 @@ router.get('/github/:username', (req, res) => {
       if (response.statusCode !== 200) {
         res.status(404).json({ msg: 'no Github profile found' });
       }
-     return res.json(JSON.parse(body));//body going to be a regular string so we just want to surround this by json.parse
+      return res.json(JSON.parse(body)); //body going to be a regular string so we just want to surround this by json.parse
     });
   } catch (err) {
     console.error(err.message);
