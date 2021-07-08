@@ -1,10 +1,14 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Spinner from '../layouts/Spinner';
+
 import { getProfiles } from '../../actions/profile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faConnectdevelop } from '@fortawesome/free-brands-svg-icons';
+
+import Spinner from '../layouts/Spinner';
+
+
 import ProfileItem from './ProfileItem';
 
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
