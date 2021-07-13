@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfileById } from '../../actions/profile';
@@ -6,22 +6,22 @@ import Spinner from '../layouts/Spinner';
 import { Link } from 'react-router-dom';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
-import { Fragment } from 'react';
+
 import ProfileExperience from './ProfileExperience';
 import ProfileEducation from './ProfileEducation';
 import ProfileGithub from './ProfileGithub';
 const Profile = ({
   getProfileById,
-  profile: { profile, loading },
+  profile: { profile },
   auth,
   match,
 }) => {
   useEffect(() => {
     getProfileById(match.params.id);
-  }, [match.params.id, getProfileById]);
+  }, [match.params.id,  ]);
   return (
-    <div>
-      {loading || profile === null ? (
+    <Fragment>
+      { profile === null ? (
         <Spinner />
       ) : (
         <section className='container'>
@@ -73,7 +73,7 @@ const Profile = ({
           )}
         </section>
       )}
-    </div>
+    </Fragment>
   );
 };
 

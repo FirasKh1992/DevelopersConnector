@@ -6,6 +6,7 @@ import PostItem from './PostItem';
 import Spinner from '../layouts/Spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import PostForm from './PostForm';
 const Posts = ({ getPosts, post: { posts, loading } }) => {
   useEffect(() => {
     getPosts();
@@ -13,7 +14,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
 
   return (
     <section className='container'>
-      {(loading===true || posts === null) ? (
+      {(loading || posts === null) ? (
         <Spinner />
       ) : (
         <Fragment>
@@ -21,6 +22,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
           <p className='lead'>
             <FontAwesomeIcon icon={faUser} /> Welcome to the community
           </p>
+          <PostForm/>
           <div className='posts'>
           {posts.length > 0 ? (
             posts.map(post => (
