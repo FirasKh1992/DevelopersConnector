@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_POSTS, POST_ERROR, UPDATE_LIKES } from './types';
+import { DELETE_POST, GET_POSTS, POST_ERROR, UPDATE_LIKES } from './types';
 
 //get all posts
 export const getPosts = () => async dispatch => {
@@ -23,7 +23,7 @@ export const addLike = postId => async dispatch => {
     const res = await axios.put(`/api/posts/like/${postId}`);
     dispatch({
       type: UPDATE_LIKES,
-      payload:{postId,likes: res.data},
+      payload: { postId, likes: res.data },
     });
   } catch (err) {
     dispatch({
@@ -33,15 +33,31 @@ export const addLike = postId => async dispatch => {
   }
 };
 
-
 //remove like
 export const removeLike = postId => async dispatch => {
   try {
     const res = await axios.put(`/api/posts/unlike/${postId}`);
     dispatch({
       type: UPDATE_LIKES,
-      payload:{postId,likes: res.data},
+      payload: { postId, likes: res.data },
     });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//DELETE POST
+export const deletePost = postId => async dispatch => {
+  try {
+    const res = await axios.delete(`/api/posts/${postId}`);
+    dispatch({
+      type: DELETE_POST,
+      payload: postId,
+    });
+    dispatch(setAlert('Post Removed', 'success'));
   } catch (err) {
     dispatch({
       type: POST_ERROR,

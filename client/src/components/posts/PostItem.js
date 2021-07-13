@@ -10,11 +10,11 @@ import {
   faThumbsDown,
 } from '@fortawesome/free-solid-svg-icons';
 
-
-import { addLike,removeLike } from '../../actions/post';
+import { addLike, removeLike, deletePost } from '../../actions/post';
 const PostItem = ({
   addLike,
   removeLike,
+  deletePost,
   auth,
   onePost: { _id, text, name, avatar, user, likes, comments, date },
 }) => {
@@ -31,11 +31,19 @@ const PostItem = ({
         <p className='post-date'>
           Posted on <Moment format='YYYY/MM/DD'>{date}</Moment>
         </p>
-        <button onClick={e=>addLike(_id)} type='button' className='btn btn-light'>
+        <button
+          onClick={e => addLike(_id)}
+          type='button'
+          className='btn btn-light'
+        >
           <FontAwesomeIcon icon={faThumbsUp} />{' '}
           <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
         </button>
-        <button onClick={e=>removeLike(_id)} type='button' className='btn btn-light'>
+        <button
+          onClick={e => removeLike(_id)}
+          type='button'
+          className='btn btn-light'
+        >
           <FontAwesomeIcon icon={faThumbsDown} />
         </button>
         <Link to={`/post/${_id}`} className='btn btn-primary'>
@@ -45,7 +53,11 @@ const PostItem = ({
           )}
         </Link>
         {!auth.loading && user === auth.user._id && (
-          <button type='button' className='btn btn-danger'>
+          <button
+            onClick={e => deletePost(_id)}
+            type='button'
+            className='btn btn-danger'
+          >
             <FontAwesomeIcon icon={faTimes} />
           </button>
         )}
@@ -57,11 +69,14 @@ const PostItem = ({
 PostItem.propTypes = {
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  addLike:PropTypes.func.isRequired,
-  removeLike:PropTypes.func.isRequired,
+  addLike: PropTypes.func.isRequired,
+  removeLike: PropTypes.func.isRequired,
+  DeletePost: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
 });
-export default connect(mapStateToProps, {addLike,removeLike})(PostItem);
+export default connect(mapStateToProps, { addLike, removeLike, deletePost })(
+  PostItem
+);
