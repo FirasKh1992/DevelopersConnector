@@ -6,9 +6,7 @@ import Spinner from '../layouts/Spinner';
 
 const ProfileGithub = ({ username, getGithubRepos, repos }) => {
   useEffect(() => {
-    console.log('github profile had been rendered');
     if (username) getGithubRepos(username);
-    console.log(' profileGithub  rendered');
   }, [getGithubRepos]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -39,9 +37,7 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
                 <li className='badge badge-dark'>
                   Watchers:{repos.watchers_count}
                 </li>
-                <li className='badge badge-light'>
-                  Forks:{repos.forks_count}
-                </li> 
+                <li className='badge badge-light'>Forks:{repos.forks_count}</li>
               </ul>
             </div>
           </div>

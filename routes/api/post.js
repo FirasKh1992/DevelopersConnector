@@ -36,14 +36,14 @@ router.post(
   }
 );
 
-//@route get api/post
+//@route get api/posts
 //@desc get all posts
 //@access  private
 router.get('/', auth, async (req, res) => {
   try {
     const posts = await Post.find().sort({ date: -1 }); //sort by the most recent first that why we used the negative 1
     res.json(posts);
-  } catch (error) {
+  } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
   }
