@@ -5,7 +5,8 @@ import Spinner from '../layouts/Spinner';
 import { getPost } from '../../actions/post';
 import PostItem from '../posts/PostItem';
 import CommentForm from '../post/CommentForm';
-import { Link } from 'react-router-dom';
+import CommentItem  from '../post/CommentItem';
+import { Link } from 'react-router-dom'; 
 
 const Post = ({ getPost, post: { post, loading }, match }) => {
   useEffect(() => {
@@ -20,6 +21,11 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
       </Link>
       <PostItem onePost={post} showActions={false} />
       <CommentForm postId={post._id} />
+      <div className='comments'>
+        {post.comments.map(comment => (
+          <CommentItem key={comment._id} comment={comment} postId={post._id} />
+        ))}
+      </div>
     </Fragment>
   );
 };
