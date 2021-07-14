@@ -78,7 +78,7 @@ const EditProfile = ({
     createProfile(formData, history, true);
   };
   return (
-    <div className='page'>
+    <Fragment>
       <h1 className='large text-primary'>Create Your Profile</h1>
       <p className='lead'>
         <FontAwesomeIcon icon={faUser} /> Let's get some information to make
@@ -274,7 +274,7 @@ const EditProfile = ({
           Go Back
         </Link>
       </form>
-    </div>
+    </Fragment>
   );
 };
 

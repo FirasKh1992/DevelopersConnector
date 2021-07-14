@@ -13,7 +13,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
   }, [getPosts]);
 
   return (
-    <section className='container'>
+    <Fragment>
       {(loading || posts === null) ? (
         <Spinner />
       ) : (
@@ -34,7 +34,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
           </div>
         </Fragment>
       )}
-    </section>
+    </Fragment>
   );
 };
 

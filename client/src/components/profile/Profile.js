@@ -24,7 +24,7 @@ const Profile = ({
       { profile === null ? (
         <Spinner />
       ) : (
-        <section className='container'>
+        <Fragment>
           <Link to='/profiles' className='btn btn-light'>
             Back to Profiles
           </Link>
@@ -71,7 +71,7 @@ const Profile = ({
           {profile.githubusername && (
               <ProfileGithub username={profile.githubusername} />
           )}
-        </section>
+        </Fragment>
       )}
     </Fragment>
   );

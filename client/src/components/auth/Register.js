@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types'
+import { Fragment } from 'react';
 
 const Register = (props) => {
   const {setAlert,register,isAuthenticated}=props;
@@ -31,7 +32,7 @@ if(isAuthenticated)
   return <Redirect to='/dashboard'/>
 }
   return (
-    <section className='container'>
+    <Fragment>
       <h1 className='large text-primary'>Sign Up</h1>
       <p className='lead'>
         <i className='fas fa-user'></i> Create Your Account
@@ -86,7 +87,7 @@ if(isAuthenticated)
       <p className='my-1'>
         Already have an account? <Link to='/login'>Sign In</Link>
       </p>
-    </section>
+    </Fragment>
   );
 };
 
